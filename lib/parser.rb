@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Parse the content to easily read the page and IP adresses
 module Parser
+  # Parse the content to easily read the page and IP address
   class Parser
     attr_reader :content
 
