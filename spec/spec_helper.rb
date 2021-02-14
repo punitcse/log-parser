@@ -3,7 +3,9 @@
 require 'simplecov'
 SimpleCov.start
 
-Dir["#{File.dirname(__FILE__)}/../lib/*.rb"].each { |f| require f }
+RSPEC_ROOT = File.dirname __FILE__
+
+Dir["#{RSPEC_ROOT}/../lib/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
