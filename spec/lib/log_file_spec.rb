@@ -22,5 +22,11 @@ describe LogFile do
        'File Format not allowed. Please try with a file with .log extension'
       )
     end
+
+    it 'reads a file line by line when file is valid' do
+      path = "#{RSPEC_ROOT}/fixtures/files/test.log"
+      log_file = described_class.new(path)
+      expect(log_file.content).to be_a(Array)
+    end
   end
 end
