@@ -2,7 +2,7 @@
 
 require_relative '../spec_helper'
 
-describe LogFile do
+describe Parser::LogFile do
   describe '#initialize' do
     it 'throws an error when file not found' do
       expect do
@@ -27,6 +27,7 @@ describe LogFile do
       path = "#{RSPEC_ROOT}/fixtures/files/test.log"
       log_file = described_class.new(path)
       expect(log_file.content).to be_a(Array)
+      expect(log_file.content).to match_array(["/help_page/1 126.318.035.038\n", "/home 184.123.665.067\n"])
     end
   end
 end
