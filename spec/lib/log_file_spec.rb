@@ -19,7 +19,7 @@ describe LogFile do
         described_class.new(path)
       end.to raise_exception(
         described_class::FileFormatIsInvalid,
-       'File Format not allowed. Please try with a file with .log extension'
+        'File Format not allowed. Please try with a file with .log extension'
       )
     end
 
