@@ -16,17 +16,10 @@ module Parser
       logs = []
 
       content.each do |line|
-        page_name, ip_address = line.split
-        page =  validate_page_name(page_name)
+        page, ip_address = line.split
         logs << LogLine.new(page: page, ip_address: ip_address)
       end
       logs
-    end
-
-    private
-
-    def validate_page_name(name)
-      name.delete_prefix('/').split('/').first
     end
   end
 end

@@ -15,12 +15,12 @@ describe Parser::Parser do
 
       expect(logs.size).to eq(2)
       expect(logs).to match_array([
-                                    log_line.new(page: 'help_page', ip_address: '126.318.035.038'),
-                                    log_line.new(page: 'home', ip_address: '184.123.665.067')
+                                    log_line.new(page: '/help_page/1', ip_address: '126.318.035.038'),
+                                    log_line.new(page: '/home', ip_address: '184.123.665.067')
                                   ])
     end
 
-    it 'does not return full URI for page name' do
+    it 'return the full URI for page name' do
       content = [
         '/otherpage/1/2/3/4 126.318.035.038'
       ]
@@ -28,7 +28,7 @@ describe Parser::Parser do
 
       expect(logs.size).to eq(1)
       expect(logs).to match_array([
-                                    log_line.new(page: 'otherpage', ip_address: '126.318.035.038')
+                                    log_line.new(page: '/otherpage/1/2/3/4', ip_address: '126.318.035.038')
                                   ])
     end
 
@@ -40,7 +40,7 @@ describe Parser::Parser do
 
       expect(logs.size).to eq(1)
       expect(logs).to match_array([
-                                    log_line.new(page: 'home', ip_address: '184.123.665.067')
+                                    log_line.new(page: '/home', ip_address: '184.123.665.067')
                                   ])
     end
   end
