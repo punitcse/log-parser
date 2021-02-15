@@ -14,14 +14,13 @@ module Parser
       @path = path
       validate!
 
-      @content = File.readlines(path)
+      begin
+        file = File.open(path, 'r')
+        @content = file.readlines
+      ensure
+        file.close
+      end
     end
-
-    # def read_lines
-    #   File.open(path).each_line do |line|
-    #     yield(line)
-    #   end
-    # end
 
     private
 
