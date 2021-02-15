@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'ostruct'
 
 module Parser
   # Parse the content to easily read the page and IP address
