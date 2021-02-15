@@ -6,20 +6,21 @@ module Parser
   class Parser
     attr_reader :content
 
-    class LogLine < OpenStruct; end
-
     def initialize(content)
       @content = content
     end
 
     def parse
-      logs = []
-
-      content.each do |line|
+      content.each_with_object({}) do |line, logs|
         page, ip_address = line.split
-        logs << LogLine.new(page: page, ip_address: ip_address)
+
+        if logs[page] && logs[page][ip_address]
+          logs[page][ip_address][:count] += 1
+        else
+          logs[page] = {} if logs[page].nil?
+          logs[page][ip_address] = { count: 1 }
+        end
       end
-      logs
     end
   end
 end
