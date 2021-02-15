@@ -5,7 +5,7 @@ Parse logs for a given log file and return the number of page views.
 
 Run the ruby script
 ```ruby
-./parser.rb <your log file>
+./bin/parser.rb <your log file>
 ```
 Returns the list of number of webpage views and unique views. Like
 ```yaml
