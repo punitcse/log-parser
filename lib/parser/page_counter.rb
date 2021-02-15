@@ -10,10 +10,8 @@ module Parser
     end
 
     def count(unique_ip: false)
-      grouped_logs = logs.group_by(&:page)
-
-      grouped_logs.map do |page, log|
-        count = unique_ip ? log.uniq(&:ip_address).count : log.count
+      logs.map do |page, ip_addrs|
+        count = unique_ip ? ip_addrs.values.size : ip_addrs.values.sum { |ip| ip[:count] }
         { page: page, count: count }
       end
     end

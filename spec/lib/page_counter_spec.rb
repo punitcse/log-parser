@@ -4,35 +4,42 @@ require_relative '../spec_helper'
 
 describe Parser::PageCounter do
   it 'returns blank array when no log present' do
-    content = []
+    content = {}
     expect(described_class.new(content).count).to be_empty
   end
 
   let(:content) do
-    log_line = Parser::Parser::LogLine
-
-    [
-      log_line.new(page: 'help_page', ip_address: '126.318.035.038'),
-      log_line.new(page: 'home', ip_address: '184.123.665.067'),
-      log_line.new(page: 'help_page', ip_address: '126.318.035.038'),
-      log_line.new(page: 'home', ip_address: '184.123.665.067'),
-      log_line.new(page: 'help_page', ip_address: '102.318.035.038')
-    ]
+    {
+      '/help_page' => {
+        '126.318.035.038' => { count: 3 },
+        '184.123.665.067' => { count: 5 },
+        '184.123.665.068' => { count: 1 }
+      },
+      '/home' => {
+        '184.123.665.067' => { count: 2 },
+        '123.123.665.068' => { count: 28 }
+      },
+      '/about/1' => {
+        '126.318.035.038' => { count: 5 }
+      }
+    }
   end
 
-  let(:page_counter) { described_class.new(content) }
+  subject { described_class.new(content) }
 
-  it 'counts the number of page view' do
-    expect(page_counter.count).to match_array([
-                                                { page: 'home', count: 2 },
-                                                { page: 'help_page', count: 3 }
-                                              ])
+  it 'count the number of page view' do
+    expect(subject.count).to match_array([
+                                           { page: '/help_page', count: 9 },
+                                           { page: '/home', count: 30 },
+                                           { page: '/about/1', count: 5 }
+                                         ])
   end
 
-  it 'counts return the number of unique page view' do
-    expect(page_counter.count(unique_ip: true)).to match_array([
-                                                                 { page: 'home', count: 1 },
-                                                                 { page: 'help_page', count: 2 }
-                                                               ])
+  it 'count the number of unique page view' do
+    expect(subject.count(unique_ip: true)).to match_array([
+                                                            { page: '/help_page', count: 3 },
+                                                            { page: '/home', count: 2 },
+                                                            { page: '/about/1', count: 1 }
+                                                          ])
   end
 end
