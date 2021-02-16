@@ -15,7 +15,7 @@ module Parser
         { page: page, count: count }
       end
 
-      logs_with_page_count.sort { |log| -log[:count] }
+      logs_with_page_count.sort_by{ |log| -log[:count] }
     end
   end
 end
