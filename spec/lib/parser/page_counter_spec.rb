@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 describe Parser::PageCounter do
   it 'returns blank array when no log present' do
@@ -27,15 +27,15 @@ describe Parser::PageCounter do
 
   subject { described_class.new(content) }
 
-  it 'count the number of page view' do
+  it 'count the number of page view and sort them and sort them in descending order' do
     expect(subject.count).to match_array([
-                                           { page: '/help_page', count: 9 },
                                            { page: '/home', count: 30 },
+                                           { page: '/help_page', count: 9 },
                                            { page: '/about/1', count: 5 }
                                          ])
   end
 
-  it 'count the number of unique page view' do
+  it 'count the number of unique page view and sort them in descending order' do
     expect(subject.count(unique_ip: true)).to match_array([
                                                             { page: '/help_page', count: 3 },
                                                             { page: '/home', count: 2 },

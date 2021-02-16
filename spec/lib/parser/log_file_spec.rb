@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 describe Parser::LogFile do
   describe '#initialize' do
+    let(:path) { "#{RSPEC_ROOT}/fixtures/files/test.log" }
+
     it 'throws an error when file not found' do
       expect do
         described_class.new('./file_not_exists.log')
@@ -14,9 +16,9 @@ describe Parser::LogFile do
     end
 
     it 'throws an error when file is not correct format' do
-      path = "#{RSPEC_ROOT}/fixtures/files/test.json"
+      invalid_format_file_path = "#{RSPEC_ROOT}/fixtures/files/test.json"
       expect do
-        described_class.new(path)
+        described_class.new(invalid_format_file_path)
       end.to raise_exception(
         described_class::FileFormatIsInvalid,
         'File Format not allowed. Please try with a file with .log extension'
@@ -24,10 +26,19 @@ describe Parser::LogFile do
     end
 
     it 'reads a file line by line when file is valid' do
-      path = "#{RSPEC_ROOT}/fixtures/files/test.log"
       log_file = described_class.new(path)
       expect(log_file.content).to be_a(Array)
-      expect(log_file.content).to match_array(["/help_page/1 126.318.035.038\n", "/home 184.123.665.067\n"])
+      expect(log_file.content.length).to eq(6)
+    end
+
+    it 'ensures that the file is closed' do
+      file = instance_double(File)
+
+      allow(File).to receive(:open).and_return(file)
+      allow(file).to receive(:readlines)
+
+      expect(file).to receive(:close)
+      described_class.new(path)
     end
   end
 end

@@ -1,16 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../lib/parser/log_file'
-require_relative '../lib/parser/page_counter'
 require_relative '../lib/parser'
 
-file_path = ARGV[0].strip
+file_path = ARGV[0]
 
-content = Parser::LogFile.new(file_path).content
-parsed_logs = Parser::Parser.new(content).parse
-counter = Parser::PageCounter.new(parsed_logs)
+raise ArgumentError, 'Please provide a log file to parse' unless file_path
 
-puts counter.count
-puts '===========================unique views===================================='
-puts counter.count(unique_ip: true)
+Parser.call(file_path)
