@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 describe Parser::LogFile do
   describe '#initialize' do
@@ -25,9 +25,10 @@ describe Parser::LogFile do
 
     it 'reads a file line by line when file is valid' do
       path = "#{RSPEC_ROOT}/fixtures/files/test.log"
+
       log_file = described_class.new(path)
       expect(log_file.content).to be_a(Array)
-      expect(log_file.content).to match_array(["/help_page/1 126.318.035.038\n", "/home 184.123.665.067\n"])
+      expect(log_file.content.length).to eq(6)
     end
   end
 end

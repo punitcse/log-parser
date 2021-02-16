@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
 describe Parser::PageCounter do
   it 'returns blank array when no log present' do

@@ -7,6 +7,7 @@ module Parser
 
     def initialize(logs)
       @logs = logs
+      self
     end
 
     def count(unique_ip: false)
