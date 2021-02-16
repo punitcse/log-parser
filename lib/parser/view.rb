@@ -11,8 +11,6 @@ module Parser
       end
     end
 
-    private
-
     def render_line(page_name, count, unique: false)
       if unique
         puts "#{page_name} #{count} unique views"

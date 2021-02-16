@@ -26,4 +26,16 @@ describe Parser::View do
       subject.render(response, unique: true)
     end
   end
+
+  describe '#render_line' do
+    it 'prints the line for page view' do
+      expect($stdout).to receive(:puts).with('/contact 32 visits')
+      subject.render_line('/contact', 32)
+    end
+
+    it 'prints the line unique page view' do
+      expect($stdout).to receive(:puts).with('/home 3 unique views')
+      subject.render_line('/home', 3, unique: true)
+    end
+  end
 end

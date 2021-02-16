@@ -5,8 +5,7 @@ require_relative 'parser/page_counter'
 require_relative 'parser/content_parser'
 require_relative 'parser/view'
 
-require_relative 'parser/version'
-
+# Parser parse the file content and render the content in human readable format.
 module Parser
   def self.call(file_path)
     logfile = LogFile.new(file_path)
