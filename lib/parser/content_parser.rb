@@ -8,7 +8,7 @@ module Parser
     attr_reader :content
 
     def initialize(content)
-      @content = content
+      @content = validate(content)
     end
 
     def parse
@@ -22,6 +22,12 @@ module Parser
           logs[page][ip_address] = { count: 1 }
         end
       end
+    end
+
+    private
+
+    def validate(body)
+      body.reject { |line| line.strip.empty? }.map(&:strip)
     end
   end
 end
