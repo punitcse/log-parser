@@ -25,8 +25,7 @@ It returns the list of number of webpage views and unique views. Like
     - PageCounter: Counts the page visits and unique views.
     - View: Present the final output.
     
-1. Initial implementation was to store each ip address and page in an OpenStruct. But then there would be repetition of ip address and page both.  
-Which is not ideal for test as well as the memory. So I chose the hash which saves each page name as key and has multiple ip addresses.
+1. Initial implementation was to store each ip address and page in an OpenStruct. But then there would be repetition of ip address and page both.Which is not ideal for test as well as the memory. So I chose the hash which saves each page name as key and has multiple ip addresses.
 Each ip address stores the count while reading the file. It would not be ideal solution if there are more requirements but as a concept of extreme programming [YAGNI](https://martinfowler.com/bliki/Yagni.html) we can discard it.
    
 ## What can be improved

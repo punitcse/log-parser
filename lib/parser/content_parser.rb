@@ -13,7 +13,8 @@ module Parser
 
     def parse
       content.each_with_object({}) do |line, logs|
-        page, ip_address = line.split
+        next if line.strip.empty?
+        page, ip_address = line.strip.split
 
         if logs[page] && logs[page][ip_address]
           logs[page][ip_address][:count] += 1

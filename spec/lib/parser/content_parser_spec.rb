@@ -59,5 +59,14 @@ describe Parser::ContentParser do
       expect(logs.size).to eq(1)
       expect(logs).to eq({ '/home' => { '184.123.665.067' => { count: 1 } } })
     end
+
+    it 'skip any empty line' do
+      content = [
+        '/home 184.123.665.067 184.123.665.067',
+        '  '
+      ]
+      logs = described_class.new(content).parse
+      expect(logs.size).to eq(1)
+    end
   end
 end
