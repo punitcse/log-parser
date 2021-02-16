@@ -35,7 +35,7 @@ describe Parser do
         expect(view).to receive(:render).with(content)
         expect(view).to receive(:render).with(unique_content, unique: true)
 
-        Parser.call(path)
+        subject
       end
     end
   end
